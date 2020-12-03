@@ -16,12 +16,24 @@ class _CustomreportState extends State<Customreport> {
   Map itemdata;
   List itemlist = List();
   List customerlist = List();
+  // String endDate;
 
   String datetotext(DateTime dateTime) {
     if (dateTime == null) {
       return 'Start Date';
     } else {
-      return "${dateTime.toLocal()}".split(' ')[0];
+      print(dateTime);
+      return "${dateTime}".split(' ')[0];
+    }
+  }
+
+  String datetotext1(DateTime dateTime) {
+    if (dateTime == null) {
+      return 'End Date';
+    } else {
+      print(dateTime);
+
+      return "${dateTime}".split(' ')[0];
     }
   }
 
@@ -67,6 +79,20 @@ class _CustomreportState extends State<Customreport> {
     if (picked != null && picked != startDate)
       setState(() {
         startDate = picked;
+      });
+  }
+
+  DateTime endDate = DateTime.now();
+
+  Future<Null> _endDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: endDate,
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != endDate)
+      setState(() {
+        endDate = picked;
       });
   }
 
@@ -188,25 +214,32 @@ class _CustomreportState extends State<Customreport> {
 
                     Padding(padding: EdgeInsets.all(20)),
                     GestureDetector(
-                      onTap: () => _selectDate(context),
+                      //  onTap: () => _selectDate(context),
+                      onTap: () => _endDate(context),
+
                       child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.blue,
-                        ),
-                        height: 30, width: 100,
-
-                        child: Text("${selectedDate.toLocal()}".split(' ')[0],
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                          ),
+                          height: 30,
+                          width: 100,
+                          child: Text(
+                            datetotext1(selectedDate),
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.white)),
+                            style: TextStyle(color: Colors.white),
+                          )),
 
-                        // SizedBox(
-                        //   height: 20.0,
-                        // ),
-                        // child: RaisedButton(
-                        //
-                        //   child: Text('Select date'),
-                        // ),
-                      ),
+                      // child: Text("${selectedDate}".split(' ')[0],
+                      //     textAlign: TextAlign.center,
+                      //     style: TextStyle(color: Colors.white)),
+
+                      // SizedBox(
+                      //   height: 20.0,
+                      // ),
+                      // child: RaisedButton(
+                      //
+                      //   child: Text('Select date'),
+                      // ),
                     ),
 
                     //  color: Colors.blue,

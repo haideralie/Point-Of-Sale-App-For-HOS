@@ -1,6 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:hos_app/login.dart';
 import 'package:hos_app/sales.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -59,6 +62,138 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      drawer: Container(
+        width: 160,
+        child: Drawer(
+            child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            Stack(
+              children: [
+                Container(
+                  height: 150,
+                  width: 400,
+                  child: DrawerHeader(
+                    // child: Container(
+                    //     padding: EdgeInsets.fromLTRB(10, 10, 20, 5),
+                    //     child: Text(
+                    //       'Menu',
+                    //       textDirection: TextDirection.rtl,
+                    //       style: TextStyle(fontSize: 20, color: Colors.white),
+                    //     )),
+                    // decoration: DecorationImage(),
+
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                    ),
+
+                    // image: DecorationImage(
+                    //     image: AssetImage('images/logo.png'),
+                    //     alignment: AlignmentDirectional(-1, 2)),
+                  ),
+                ),
+                Container(
+                  height: 140,
+                  width: 150,
+                  padding: EdgeInsets.fromLTRB(10, 50, 0, 0),
+                  child: Image(
+                    alignment: Alignment.center,
+                    image: AssetImage('images/logo.png'),
+                    //alignment: AlignmentDirectional(-1, 2)
+                  ),
+                )
+              ],
+            ),
+            InkWell(
+              child: ListTile(
+                  title: Text('Sales'),
+                  onTap: () {
+                    // Update the state of the app
+                    // ...
+                    // Then close the drawer
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Sales()));
+                  }),
+            ),
+            ListTile(
+                title: Text('Purchase'),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+
+                  //  Icon(Icons.assessment, color: Colors.redAccent);
+
+                  Navigator.pop(context,
+                      MaterialPageRoute(builder: (context) => Sales()));
+                }),
+            ListTile(
+              title: Text('Stock'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(
+                    context, MaterialPageRoute(builder: (context) => Sales()));
+              },
+            ),
+            ListTile(
+              title: Text('Expense'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(
+                    context, MaterialPageRoute(builder: (context) => Sales()));
+              },
+            ),
+            ListTile(
+              title: Text('Outstandings'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(
+                    context, MaterialPageRoute(builder: (context) => Sales()));
+              },
+            ),
+            ListTile(
+              title: Text('Dashboard'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(
+                    context, MaterialPageRoute(builder: (context) => Sales()));
+              },
+            ),
+            ListTile(
+              title: Text('General Ledger'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(
+                    context, MaterialPageRoute(builder: (context) => Sales()));
+              },
+            ),
+            ListTile(
+              title: Text('Logout'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Login()));
+              },
+            ),
+          ],
+        )),
+      ),
+      appBar: AppBar(
+        title: Text('Home'),
+      ),
       body: SafeArea(
           child: Column(children: [
         Container(
@@ -66,15 +201,41 @@ class HomeScreen extends StatelessWidget {
           child: Carousel(
             boxFit: BoxFit.cover,
             images: [
-              NetworkImage('https://hos.com.pk/MobileApp/1.png'),
-              NetworkImage('https://hos.com.pk/MobileApp/2.png'),
-              NetworkImage('https://hos.com.pk/MobileApp/3.png'),
-              NetworkImage('https://hos.com.pk/MobileApp/4.png'),
+              Image(
+                image: CachedNetworkImageProvider(
+                  'https://hos.com.pk/MobileApp/1.png',
+                ),
+                fit: BoxFit.fill,
+              ),
+
+              Image(
+                image: CachedNetworkImageProvider(
+                  'https://hos.com.pk/MobileApp/2.png',
+                ),
+                fit: BoxFit.fill,
+              ),
+              Image(
+                image: CachedNetworkImageProvider(
+                  'https://hos.com.pk/MobileApp/3.png',
+                ),
+                fit: BoxFit.fill,
+              ),
+              Image(
+                image: CachedNetworkImageProvider(
+                  'https://hos.com.pk/MobileApp/4.png',
+                ),
+                fit: BoxFit.fill,
+              ),
+
+              // NetworkImage('https://hos.com.pk/MobileApp/1.png'),
+              // NetworkImage('https://hos.com.pk/MobileApp/2.png'),
+              // NetworkImage('https://hos.com.pk/MobileApp/3.png'),
+              // NetworkImage('https://hos.com.pk/MobileApp/4.png'),
             ],
           ),
         ),
         SizedBox(
-          height: 65,
+          height: 40,
           width: 100,
         ),
         Expanded(

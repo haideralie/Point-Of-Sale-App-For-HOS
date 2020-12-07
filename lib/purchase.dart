@@ -10,30 +10,30 @@ int _value = 1;
 int _value2 = 1;
 int _value3 = 1;
 
-class Sales extends StatefulWidget {
+class Purchase extends StatefulWidget {
   @override
-  _SalesState createState() => _SalesState();
+  _PurchaseState createState() => _PurchaseState();
 }
 
-class _SalesState extends State<Sales> {
+class _PurchaseState extends State<Purchase> {
   Map itemdata;
   List itemlist = List();
-  List customerlist = List();
+  List supplierlist = List();
 
   String val;
-  int selectitem_index, selectcustomer_index;
+  int selectitem_index, selectsupplier_index;
 
   var abc;
 
   Future<String> getdata() async {
     var response = await http.get(
-        Uri.encodeFull('http://192.168.10.50:8081/api/Account/Sale'),
+        Uri.encodeFull('http://192.168.10.50:8081/api/Account/Purchase'),
         headers: {'Accepts': 'application/json'});
     Map<String, dynamic> map = json.decode(response.body);
 
     setState(() {
       itemlist = map['item'];
-      customerlist = map['customer'];
+      supplierlist = map['supplier'];
     });
   }
 
@@ -156,7 +156,7 @@ class _SalesState extends State<Sales> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('Sales Report'),
+          title: Text('Purchase Report'),
         ),
         body: SafeArea(
             child: Container(
@@ -183,7 +183,7 @@ class _SalesState extends State<Sales> {
                                   child: FlatButton(
                                       onPressed: () {},
                                       child: Text(
-                                        'Quick Action',
+                                        'Quick Report',
                                         style: TextStyle(color: Colors.white),
                                       ))),
                               Container(
@@ -235,6 +235,44 @@ class _SalesState extends State<Sales> {
                   ),
 
                   Text(
+                    'Supplier',
+                    style: TextStyle(color: Colors.blue),
+                    textAlign: TextAlign.left,
+                  ),
+                  Container(
+                    height: 100,
+                    width: 500,
+                    child: SearchableDropdown.single(
+                      isExpanded: true,
+                      isCaseSensitiveSearch: false,
+                      searchHint: new Text('Search Customer'),
+                      value: val,
+                      onChanged: (String value) {
+                        supplierlist.map((e) {
+                          if (e['suP_NAME'] == value) {
+                            setState(() {
+                              val = value;
+                              selectitem_index = supplierlist.indexOf(e);
+                            });
+                          }
+                        });
+
+                        print(val);
+                        Toast.show(value, context,
+                            duration: Toast.LENGTH_SHORT,
+                            gravity: Toast.BOTTOM);
+                      },
+                      hint: Text('Select Supplier'),
+                      items: supplierlist.map((item) {
+                        return new DropdownMenuItem(
+                          child: new Text(item['suP_NAME']),
+                          value: item['suP_CODE'].toString(),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+
+                  Text(
                     'Products',
                     style: TextStyle(color: Colors.blue),
                   ),
@@ -271,43 +309,6 @@ class _SalesState extends State<Sales> {
                     ),
                   ),
 
-                  Text(
-                    'Customer',
-                    style: TextStyle(color: Colors.blue),
-                    textAlign: TextAlign.left,
-                  ),
-                  Container(
-                    height: 100,
-                    width: 500,
-                    child: SearchableDropdown.single(
-                      isExpanded: true,
-                      isCaseSensitiveSearch: false,
-                      searchHint: new Text('Search Customer'),
-                      value: val,
-                      onChanged: (String value) {
-                        customerlist.map((e) {
-                          if (e['cuS_NAME'] == value) {
-                            setState(() {
-                              val = value;
-                              selectcustomer_index = customerlist.indexOf(e);
-                            });
-                          }
-                        });
-
-                        print(val);
-                        Toast.show(value, context,
-                            duration: Toast.LENGTH_SHORT,
-                            gravity: Toast.BOTTOM);
-                      },
-                      hint: Text('Select Customer'),
-                      items: customerlist.map((item) {
-                        return new DropdownMenuItem(
-                          child: new Text(item['cuS_NAME']),
-                          value: item['cuS_CODE'].toString(),
-                        );
-                      }).toList(),
-                    ),
-                  ),
                   //
                   //       Text(
                   //         'Quick Action',

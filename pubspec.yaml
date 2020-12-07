@@ -37,6 +37,8 @@ dependencies:
   toast: ^0.1.5
   flutter_datetime_picker: ^1.4.0
   cached_network_image: ^2.4.1
+  syncfusion_flutter_charts: ^18.3.52
+
 
 dev_dependencies:
   flutter_test:

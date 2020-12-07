@@ -3,8 +3,14 @@ import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:hos_app/Expense.dart';
 import 'package:hos_app/login.dart';
+import 'package:hos_app/model/outstandingchart.dart';
+import 'package:hos_app/purchase.dart';
 import 'package:hos_app/sales.dart';
+import 'package:hos_app/stock.dart';
+
+import 'outstanding.dart';
 
 class HomeScreen extends StatelessWidget {
   Widget tile(
@@ -125,8 +131,8 @@ class HomeScreen extends StatelessWidget {
 
                   //  Icon(Icons.assessment, color: Colors.redAccent);
 
-                  Navigator.pop(context,
-                      MaterialPageRoute(builder: (context) => Sales()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Purchase()));
                 }),
             ListTile(
               title: Text('Stock'),
@@ -134,8 +140,8 @@ class HomeScreen extends StatelessWidget {
                 // Update the state of the app
                 // ...
                 // Then close the drawer
-                Navigator.pop(
-                    context, MaterialPageRoute(builder: (context) => Sales()));
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Stock()));
               },
             ),
             ListTile(
@@ -262,7 +268,7 @@ class HomeScreen extends StatelessWidget {
                   clr: Colors.yellow,
                   ontap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Sales()));
+                        MaterialPageRoute(builder: (context) => Purchase()));
                   }),
               tile(
                   text: 'Stocks',
@@ -271,7 +277,7 @@ class HomeScreen extends StatelessWidget {
                   clr: Colors.green,
                   ontap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Sales()));
+                        MaterialPageRoute(builder: (context) => Stock()));
                   }),
               tile(
                   text: 'Expense',
@@ -280,7 +286,7 @@ class HomeScreen extends StatelessWidget {
                   clr: Colors.blue,
                   ontap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Sales()));
+                        MaterialPageRoute(builder: (context) => Expense()));
                   }),
               tile(
                   text: 'Outstandings',
@@ -289,7 +295,7 @@ class HomeScreen extends StatelessWidget {
                   clr: Colors.blue,
                   ontap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Sales()));
+                        MaterialPageRoute(builder: (context) => Outstanding()));
                   }),
               tile(
                   text: 'Dashboard',

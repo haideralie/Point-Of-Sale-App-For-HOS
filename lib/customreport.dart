@@ -54,17 +54,35 @@ class _CustomreportState extends State<Customreport> {
     });
   }
 
-  DateTime selectedDate = null;
+  DateTime selectstartDate = null;
 
-  Future<Null> _selectDate(BuildContext context) async {
+  Future<Null> _selectstartDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
         context: context,
+        // initialDate: selectedDate,
+
         initialDate: DateTime.now(),
         firstDate: DateTime(2015, 8),
         lastDate: DateTime(2101));
-    if (picked != null && picked != selectedDate)
+    if (picked != null && picked != selectstartDate)
       setState(() {
-        selectedDate = picked;
+        selectstartDate = picked;
+      });
+  }
+
+  DateTime selectendDate = null;
+
+  Future<Null> _selectendDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+        context: context,
+        // initialDate: selectedDate,
+
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != selectendDate)
+      setState(() {
+        selectendDate = picked;
       });
   }
 
@@ -185,7 +203,12 @@ class _CustomreportState extends State<Customreport> {
                     Padding(padding: EdgeInsets.fromLTRB(35, 100, 50, 50)),
 
                     GestureDetector(
-                      onTap: () => _startDate(context),
+                      onTap: () {
+                        setState(() {
+                          _selectstartDate(context);
+                        });
+                      },
+                      //_startDate(context),
 
                       child: Container(
                         decoration: BoxDecoration(
@@ -194,7 +217,7 @@ class _CustomreportState extends State<Customreport> {
                         height: 30,
                         width: 100,
                         child: Text(
-                          datetotext(selectedDate),
+                          datetotext(selectstartDate),
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.white),
                         ),
@@ -215,7 +238,12 @@ class _CustomreportState extends State<Customreport> {
                     Padding(padding: EdgeInsets.all(20)),
                     GestureDetector(
                       //  onTap: () => _selectDate(context),
-                      onTap: () => _endDate(context),
+                      // onTap: () => _endDate(context),
+                      onTap: () {
+                        setState(() {
+                          _selectendDate(context);
+                        });
+                      },
 
                       child: Container(
                           decoration: BoxDecoration(
@@ -224,7 +252,7 @@ class _CustomreportState extends State<Customreport> {
                           height: 30,
                           width: 100,
                           child: Text(
-                            datetotext1(selectedDate),
+                            datetotext1(selectendDate),
                             textAlign: TextAlign.center,
                             style: TextStyle(color: Colors.white),
                           )),

@@ -4,11 +4,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:hos_app/Expense.dart';
+import 'package:hos_app/dashbord.dart';
 import 'package:hos_app/login.dart';
 import 'package:hos_app/model/outstandingchart.dart';
 import 'package:hos_app/purchase.dart';
 import 'package:hos_app/sales.dart';
 import 'package:hos_app/stock.dart';
+import 'dashb.dart';
 
 import 'outstanding.dart';
 
@@ -252,60 +254,84 @@ class HomeScreen extends StatelessWidget {
             mainAxisSpacing: 35,
             crossAxisCount: 2,
             children: [
-              tile(
-                  text: 'Sales',
-                  imagepath: 'images/sales2.png',
-                  size: size,
-                  clr: Colors.deepPurple,
-                  ontap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Sales()));
-                  }),
-              tile(
-                  text: 'Purchase',
-                  imagepath: 'images/purchases.png',
-                  size: size,
-                  clr: Colors.yellow,
-                  ontap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Purchase()));
-                  }),
-              tile(
-                  text: 'Stocks',
-                  imagepath: 'images/stock.png',
-                  size: size,
-                  clr: Colors.green,
-                  ontap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Stock()));
-                  }),
-              tile(
-                  text: 'Expense',
-                  imagepath: 'images/expenses.png',
-                  size: size,
-                  clr: Colors.blue,
-                  ontap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Expense()));
-                  }),
-              tile(
-                  text: 'Outstandings',
-                  imagepath: 'images/outstanding.png',
-                  size: size,
-                  clr: Colors.blue,
-                  ontap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Outstanding()));
-                  }),
-              tile(
-                  text: 'Dashboard',
-                  imagepath: 'images/dashboard1.png',
-                  size: size,
-                  clr: Colors.redAccent,
-                  ontap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Sales()));
-                  }),
+              Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    image: new DecorationImage(
+                      image: new AssetImage("images/sales2.png"),
+                      fit: BoxFit.contain,
+                    ),
+                    boxShadow: [
+                      BoxShadow(offset: Offset(2, 2), color: Colors.black54),
+                    ]),
+                child: tile(
+                    text: 'Sales',
+                    imagepath: 'images/sales2.png',
+                    size: size,
+                    clr: Colors.deepPurple,
+                    ontap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Sales()));
+                    }),
+              ),
+              Container(
+                child: tile(
+                    text: 'Purchase',
+                    imagepath: 'images/purchases.png',
+                    size: size,
+                    clr: Colors.yellow,
+                    ontap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Purchase()));
+                    }),
+              ),
+              Container(
+                child: tile(
+                    text: 'Stocks',
+                    imagepath: 'images/stock.png',
+                    size: size,
+                    clr: Colors.green,
+                    ontap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Stock()));
+                    }),
+              ),
+              Container(
+                child: tile(
+                    text: 'Expense',
+                    imagepath: 'images/expenses.png',
+                    size: size,
+                    clr: Colors.blue,
+                    ontap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Expense()));
+                    }),
+              ),
+              Container(
+                child: tile(
+                    text: 'Outstandings',
+                    imagepath: 'images/outstanding.png',
+                    size: size,
+                    clr: Colors.blue,
+                    ontap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Outstanding()));
+                    }),
+              ),
+              Container(
+                child: tile(
+                    text: 'Dashboard',
+                    imagepath: 'images/dashboard1.png',
+                    size: size,
+                    clr: Colors.redAccent,
+                    ontap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Dashb()));
+                    }),
+              ),
             ],
           ),
         )

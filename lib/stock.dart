@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hos_app/customreport.dart';
+import 'package:hos_app/stockreport.dart';
 import 'package:searchable_dropdown/searchable_dropdown.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -101,17 +102,25 @@ class _StockState extends State<Stock> {
                       }).toList(),
                     ),
                   ),
-                  Container(
-                    height: 50,
-                    width: 250,
-                    padding: EdgeInsets.fromLTRB(10, 0, 50, 0),
-                    decoration: BoxDecoration(
-                        color: Colors.blue,
-                        border: Border.all(color: Colors.blue),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Text(
-                      'Generate Report',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => StocksReport()));
+                    },
+                    child: Container(
+                      height: 50,
+                      width: 250,
+                      padding: EdgeInsets.fromLTRB(10, 0, 50, 0),
+                      decoration: BoxDecoration(
+                          color: Colors.blue,
+                          border: Border.all(color: Colors.blue),
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Text(
+                        'Generate Report',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
                     ),
                   ),
                 ]))));
